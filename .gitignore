@@ -3,3 +3,5 @@
 *.dll
 *.so
 .Rhistory
+*.tar.gz
+inteq.Rcheck
