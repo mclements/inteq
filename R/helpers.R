@@ -1,5 +1,9 @@
 
 #' Internal function to convert (row,col) to vector index
+#' @param row integer vector the rows
+#' @param col integer vector for the columns
+#' @param nrows integer for the number of rows
+#' @returns an index vector for the cells
 indexing = function(row,col,nrows) {
     (col-1)*nrows+row
 }
@@ -7,6 +11,7 @@ indexing = function(row,col,nrows) {
 #' Internal function to generate diagonal matrices with possibly an offset with possibly mirrored diagonal
 #' @param x vector
 #' @param index integer offset index for the diagonal (can be negative)
+#' @returns diagonal matrix
 diag_ext = function(x, index, mirror=FALSE) {
     stopifnot(is.integer(index))
     if (index==0L) return(diag(x)) # ignores mirror
@@ -29,14 +34,18 @@ makeH = function(dim) {
     diag_ext(d1,1L,TRUE) + diag_ext(d2,2L,TRUE) + diag(d0)
 }
 
-#' To be completed:)
+#' Internal function to calculate integration weights for Simpson's rule
+#' @param dim integer for the number of nodes
+#' @returns a double vector for the integration weights
 simpson = function(dim) {
     stopifnot(dim>2, dim %% 2 == 1)
     tiles = rep(c(4,2),dim %/% 2)
     c(1,tiles[1:(dim-2)],1)/3
 }
 
-#' To be completed:)
+#' Internal function to smooth a vector of values using two-point average
+#' @param v double vector to be smoother
+#' @returns smoothed double vector
 smooth = function(v) {
     dim = length(v)
     smat = diag(c(1,rep(0.5, dim-1L))) + diag_ext(rep(0.5, dim-1),-1L)
