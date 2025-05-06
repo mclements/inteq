@@ -2,10 +2,16 @@
 % Please edit documentation in R/helpers.R
 \name{simpson}
 \alias{simpson}
-\title{To be completed:)}
+\title{Internal function to calculate integration weights for Simpson's rule}
 \usage{
 simpson(dim)
 }
+\arguments{
+\item{dim}{integer for the number of nodes}
+}
+\value{
+a double vector for the integration weights
+}
 \description{
-To be completed:)
+Internal function to calculate integration weights for Simpson's rule
 }

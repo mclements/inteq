@@ -7,5 +7,6 @@ Authors@R: c(person("Mark", "Clements", role = c("aut", "cre"),
 	     person("Aaron", "Jehle", role="aut"),
 	     person("Matthew", "Thomas", role="ctb"))
 Description: An R implementation of Matthew Thomas's Python library of the same name.
+Suggests: testthat
 License: MIT + file LICENSE
 RoxygenNote: 7.3.2

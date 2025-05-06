@@ -6,6 +6,16 @@
 \usage{
 indexing(row, col, nrows)
 }
+\arguments{
+\item{row}{integer vector the rows}
+
+\item{col}{integer vector for the columns}
+
+\item{nrows}{integer for the number of rows}
+}
+\value{
+an index vector for the cells
+}
 \description{
 Internal function to convert (row,col) to vector index
 }

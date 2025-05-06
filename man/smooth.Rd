@@ -2,10 +2,16 @@
 % Please edit documentation in R/helpers.R
 \name{smooth}
 \alias{smooth}
-\title{To be completed:)}
+\title{Internal function to smooth a vector of values using two-point average}
 \usage{
 smooth(v)
 }
+\arguments{
+\item{v}{double vector to be smoother}
+}
+\value{
+smoothed double vector
+}
 \description{
-To be completed:)
+Internal function to smooth a vector of values using two-point average
 }

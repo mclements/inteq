@@ -11,6 +11,9 @@ diag_ext(x, index, mirror = FALSE)
 
 \item{index}{integer offset index for the diagonal (can be negative)}
 }
+\value{
+diagonal matrix
+}
 \description{
 Internal function to generate diagonal matrices with possibly an offset with possibly mirrored diagonal
 }
