@@ -58,8 +58,8 @@ test_that("volterra_solve", {
     trueg <- function(s) {
         (2+s**2)/2
     }
-        res = fredholm_solve(k,f,-3,3,1001L,smin=-6,smax=6,snum=2001L,gamma=0.01)
-        expect_true(sum((volterra_solve(k,a=0,b=1,num=1000)$ggrid - trueg(seq(0,1,length.out=1000)))**2) < 1e-3
+        
+    expect_true(sum((volterra_solve(k,a=0,b=1,num=1000)$ggrid - trueg(seq(0,1,length.out=1000)))**2) < 1e-3
     )
 })
 
@@ -74,7 +74,7 @@ test_that("volterra_solve2", {
         #like this python cde : 1/3*(1-np.exp(-3*t/2)*(np.cos(np.sqrt(3)/2 * t) + np.sqrt(3) * np.sin(np.sqrt(3)/2 * t)))
         1/3 * (1 - exp(-3*t/2) * (cos(sqrt(3)/2*t) + sqrt(3) * sin(sqrt(3)/2*t)))
     }
-    espect_true(sum((volterra_solve2(k,free,a=0,b=6,num=100)$ggrid - true(seq(0,6,length.out=100)))**2) < 1e-11)
+    expect_true(sum((volterra_solve2(k,free,a=0,b=6,num=100)$ggrid - true(seq(0,6,length.out=100)))**2) < 1e-11)
 })
 
 
