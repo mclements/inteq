@@ -71,7 +71,6 @@ test_that("volterra_solve2", {
         0.5 * t**2 * exp(-t)
     }
     true <- function(t) {
-        #like this python cde : 1/3*(1-np.exp(-3*t/2)*(np.cos(np.sqrt(3)/2 * t) + np.sqrt(3) * np.sin(np.sqrt(3)/2 * t)))
         1/3 * (1 - exp(-3*t/2) * (cos(sqrt(3)/2*t) + sqrt(3) * sin(sqrt(3)/2*t)))
     }
     expect_true(sum((volterra_solve2(k,free,a=0,b=6,num=100)$ggrid - true(seq(0,6,length.out=100)))**2) < 1e-11)
