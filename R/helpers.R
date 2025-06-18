@@ -26,7 +26,9 @@ diag_ext = function(x, index, mirror=FALSE) {
     diag
 }
 
-#' To be completed:)
+#' Make H Matrix as in (Twomey 1963)
+#' @param dim integer for the number of dimensions of H (i.e. number of nodes for integral approximation)
+#' @returns a matrix
 makeH = function(dim) {
     d2 = rep(1, dim-2L)
     d1 = c(-2, rep(-4, dim-3), -2)
