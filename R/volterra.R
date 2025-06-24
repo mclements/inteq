@@ -3,6 +3,7 @@
 #' @param f left hand side (free) function with f(a)=0
 #' @param a lower bound of the integral
 #' @param b upper bound of the integral
+#' @param num integer for the number of evaluation points
 #' @param method string for the method
 #' @export
 volterra_solve =
@@ -31,6 +32,7 @@ volterra_solve =
 #' @param f left hand side (free) function with f(a)=0
 #' @param a lower bound of the integral
 #' @param b upper bound of the integral
+#' @param num integer for the number of evaluation points
 #' @param method string for the method
 #' @export
 volterra_solve2 =

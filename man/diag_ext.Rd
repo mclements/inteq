@@ -10,6 +10,8 @@ diag_ext(x, index, mirror = FALSE)
 \item{x}{vector}
 
 \item{index}{integer offset index for the diagonal (can be negative)}
+
+\item{mirror}{logical for whether to mirror at the diagonal}
 }
 \value{
 diagonal matrix

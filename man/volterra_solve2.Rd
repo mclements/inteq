@@ -22,6 +22,8 @@ volterra_solve2(
 
 \item{b}{upper bound of the integral}
 
+\item{num}{integer for the number of evaluation points}
+
 \item{method}{string for the method}
 }
 \description{

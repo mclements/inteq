@@ -11,6 +11,7 @@ indexing = function(row,col,nrows) {
 #' Internal function to generate diagonal matrices with possibly an offset with possibly mirrored diagonal
 #' @param x vector
 #' @param index integer offset index for the diagonal (can be negative)
+#' @param mirror logical for whether to mirror at the diagonal
 #' @returns diagonal matrix
 diag_ext = function(x, index, mirror=FALSE) {
     stopifnot(is.integer(index))
