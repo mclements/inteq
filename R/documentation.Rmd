@@ -1,0 +1,203 @@
+# Inteq R documentation
+
+This R package estimates Volterra and Fredholm integral equations.
+It is a translation into R of the Python package "inteq" by Matthew W. Thomas (https://github.com/mwt/inteq).
+
+Installation:
+//to be completed
+
+## Supported equations
+
+# Fredholm integral equations
+
+
+This package provides the function fredholm_solve which approximates the solution, $g(x)$, to the Fredholm Integral Equation of the first kind:
+
+\begin{align}
+f(s) = \int_a^b K(s, y)\, g(y)\, dy,
+\end{align}
+
+using the method described in Twomey (1963). It will return a grid that is an approximate solution, as demonstrated by the following example:
+
+\[
+f(s) = \int_{-3}^{3} K(s, y)\, g(y)\, dy,
+\]
+
+where the kernel \( K(s, y) \) and left-hand side \( f(s) \) are defined as:
+
+\[
+K(s, y) = 
+\begin{cases}
+1 + \cos\left(\dfrac{\pi (y - s)}{3}\right), & \text{if } |s - y| \leq 3 \\
+0, & \text{otherwise}
+\end{cases},
+\]
+
+\[
+f(s) = \frac{1}{2} \left[ (6 - |s|)\left(2 + \cos\left(\frac{|s| \pi}{3}\right)\right) + \frac{9}{\pi} \sin\left(\frac{|s| \pi}{3}\right) \right].
+\]
+
+The true solution is \( g(y) = K(0, y) \).
+
+```{r, echo=FALSE}
+
+source("helpers.R")
+source("fredholm.R")
+source("volterra.R")
+
+# Define the kernel function
+k <- function(s, t) {
+    ifelse(abs(s - t) <= 3, 1 + cos(pi * (t - s) / 3), 0)
+}
+
+# Define the right-hand side function
+f <- function(s) {
+    sp <- abs(s)
+    sp3 <- sp * pi / 3
+    ((6 - sp) * (2 + cos(sp3)) + (9 / pi) * sin(sp3)) / 2
+}
+
+# Define the true solution for comparison
+trueg <- function(s) {
+    k(0, s)
+}
+
+# Solve the Fredholm equation
+res <- fredholm_solve(
+    k, f, -3, 3, 1001L,
+    smin = -6, smax = 6, snum = 2001L,
+    gamma = 0.01
+)
+
+# Plot the results on the same graph using base graphics
+plot(
+    res$ygrid, res$ggrid,
+    type = "l",
+    col = "blue",
+    xlim = c(-3, 3),
+    #ylim = c(-1, 1),
+    xlab = "s",
+    ylab = "g(s)",
+    main = "Fredholm Equation Solution"
+)
+# add the true solution
+lines(res$ygrid, trueg(res$ygrid), col = "red", lty = 2)
+legend( 
+    "topright",
+    legend = c("Estimated Value", "True Value"),
+    col = c("blue", "red"),
+    lty = c(1, 2)
+)
+
+#end of code chunk
+```
+
+# Volterra integral equations
+
+This package provides the function volterra_solve which approximates the solution, g(x), to the Volterra Integral Equation of the first kind:
+
+\begin{align}
+f(s) = \int_a^s K(s,y) g(y) dy,
+\end{align}
+
+using the method in Betto and Thomas (2021), as demonstrated by the following example:
+
+\[
+f(s) = \int_0^s \cos(t-s) g(t) dt,
+\]
+
+with left-hand side
+
+\[
+f(s) = \int_0^s \cos(t-s) \frac{2 + t^2}{2} dt
+\]
+
+and true solution
+
+\[
+g(s) = \frac{2 + s^2}{2}.
+\]
+
+
+```{r, echo=FALSE}
+k <- function(s,t) {
+        cos(t-s)
+}
+trueg <- function(s) {
+    (2+s**2)/2
+}
+
+res <- volterra_solve(k,a=0,b=1,num=1000)
+
+plot(
+    res$sgrid, res$ggrid,
+    type = "l",
+    col = "blue",
+    xlim = c(0, 1),
+    #ylim = c(-1, 1),
+    xlab = "s",
+    ylab = "g(s)",
+    main = "Volterra Equation Solution first kind"
+)
+# add the true solution
+lines(res$sgrid, trueg(res$sgrid), col = "red", lty = 2)
+legend( 
+    "topright",
+    legend = c("Estimated Value", "True Value"),
+    col = c("blue", "red"),
+    lty = c(1, 2)
+)
+
+```
+
+It also provides volterra_solve2 which approximates the solution, g(x), to the Volterra Integral Equation of the second kind:
+
+\begin{align}
+g(s) = f(s) + \int_a^s K(s,y) g(y) dy,
+\end{align}
+
+using the method in Linz (1969), as demonstrated by the following example:
+
+\[
+g(s) = 1 + \int_0^s (s-t) g(t) dt,
+\]
+
+with true solution
+
+\[
+g(s) = \cosh(s).
+\]
+
+```{r, echo=FALSE}
+k <- function(s,t) {
+        0.5 * (t-s)** 2 * exp(t-s)
+}
+free <- function(t) {
+    0.5 * t**2 * exp(-t)
+}
+true <- function(t) {
+    1/3 * (1 - exp(-3*t/2) * (cos(sqrt(3)/2*t) + sqrt(3) * sin(sqrt(3)/2*t)))
+}
+
+res <- volterra_solve2(k,free,a=0,b=6,num=100)
+
+plot(
+    res$sgrid, res$ggrid,
+    type = "l",
+    col = "blue",
+    xlim = c(0, 6),
+    #ylim = c(-1, 1),
+    xlab = "s",
+    ylab = "g(s)",
+    main = "Volterra Equation Solution second kind"
+)
+# add the true solution
+lines(res$sgrid, true(res$sgrid), col = "red", lty = 2)
+legend( 
+    "topright",
+    legend = c("Estimated Value", "True Value"),
+    col = c("blue", "red"),
+    lty = c(1, 2)
+)
+
+```
