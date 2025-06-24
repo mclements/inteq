@@ -2,10 +2,16 @@
 % Please edit documentation in R/helpers.R
 \name{makeH}
 \alias{makeH}
-\title{To be completed:)}
+\title{Make H Matrix as in (Twomey 1963)}
 \usage{
 makeH(dim)
 }
+\arguments{
+\item{dim}{integer for the number of dimensions of H (i.e. number of nodes for integral approximation)}
+}
+\value{
+a matrix
+}
 \description{
-To be completed:)
+Make H Matrix as in (Twomey 1963)
 }

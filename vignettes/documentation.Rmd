@@ -1,4 +1,32 @@
-# Inteq R documentation
+---
+title: "Inteq R documentation"
+authors:
+  - name: Aaron Jehle
+    orcid: 0000-0002-3809-8248
+    affiliation: 1
+  - name: Mark Clements
+    affiliation: 1
+  - name: Matthew W. Thomas
+    affiliation: 2
+affiliations:
+ - name: Department of Medical Epidemiology and Biostatistics, Karolinska Institutet, Stockholm, Sweden
+   index: 1
+ - name: To be completed:)
+   index: 2
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: lumen
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Inteq R documentation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+
+---
 
 This R package estimates Volterra and Fredholm integral equations.
 It is a translation into R of the Python package "inteq" by Matthew W. Thomas (https://github.com/mwt/inteq).
@@ -41,9 +69,7 @@ The true solution is \( g(y) = K(0, y) \).
 
 ```{r, echo=FALSE}
 
-source("helpers.R")
-source("fredholm.R")
-source("volterra.R")
+library(inteq)
 
 # Define the kernel function
 k <- function(s, t) {

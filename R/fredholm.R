@@ -8,6 +8,8 @@
 #' @param smax upper bound of enforcement values for equation
 #' @param snum number of points for the grid for the equation
 #' @param gamma regularization parameter
+#' @example
+#' # to be completed
 #' @export
 fredholm_solve =
     function(k, f = function(x) x, a = -0, b = 1, num = 41L, smin = 0, smax = 1, snum = 41L, gamma = 0.001) {
