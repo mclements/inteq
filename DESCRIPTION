@@ -5,7 +5,7 @@ Version: 1.0
 Authors@R: c(person("Mark", "Clements", role = c("aut", "cre"),
 		     email = "mark.clements@ki.se"),
 	     person("Aaron", "Jehle", role="aut"),
-	     person("Matthew", "Thomas", role="ctb"))
+	     person("Matthew", "Thomas", role="ctb", email="mthomas@ftc.gov"))
 Description: An R implementation of Matthew Thomas's Python library of the same name.
 Suggests: knitr, rmarkdown, testthat
 VignetteBuilder: knitr
