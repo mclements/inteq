@@ -11,7 +11,7 @@ authors:
 affiliations:
  - name: Department of Medical Epidemiology and Biostatistics, Karolinska Institutet, Stockholm, Sweden
    index: 1
- - name: To be completed:)
+ - name: Bureau of Economics, Federal Trade Commission, Washington, DC, USA
    index: 2
 date: "`r Sys.Date()`"
 output:
