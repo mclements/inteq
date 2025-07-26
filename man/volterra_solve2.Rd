@@ -26,6 +26,42 @@ volterra_solve2(
 
 \item{method}{string for the method}
 }
+\value{
+data-frame with evaluation points 'sgrid' and calculated values 'ggrid'
+}
 \description{
 Solve a Volterra equation of the second kind
+}
+\examples{
+k <- function(s,t) {
+        0.5 * (t-s)** 2 * exp(t-s)
+}
+free <- function(t) {
+    0.5 * t**2 * exp(-t)
+}
+true <- function(t) {
+    1/3 * (1 - exp(-3*t/2) * (cos(sqrt(3)/2*t) + sqrt(3) * sin(sqrt(3)/2*t)))
+}
+
+res <- volterra_solve2(k,free,a=0,b=6,num=100)
+
+plot(
+    res$sgrid, res$ggrid,
+    type = "l",
+    col = "blue",
+    xlim = c(0, 6),
+    #ylim = c(-1, 1),
+    xlab = "s",
+    ylab = "g(s)",
+    main = "Volterra Equation Solution second kind"
+)
+# add the true solution
+lines(res$sgrid, true(res$sgrid), col = "red", lty = 2)
+legend( 
+    "topright",
+    legend = c("Estimated Value", "True Value"),
+    col = c("blue", "red"),
+    lty = c(1, 2)
+)
+
 }

@@ -26,6 +26,38 @@ volterra_solve(
 
 \item{method}{string for the method}
 }
+\value{
+data-frame with evaluation points 'sgrid' and calculations 'ggrid'
+}
 \description{
 Solve a Volterra equation of the first kind
+}
+\examples{
+k <- function(s,t) {
+        cos(t-s)
+}
+trueg <- function(s) {
+    (2+s**2)/2
+}
+
+res <- volterra_solve(k,a=0,b=1,num=1000)
+
+plot(
+    res$sgrid, res$ggrid,
+    type = "l",
+    col = "blue",
+    xlim = c(0, 1),
+    #ylim = c(-1, 1),
+    xlab = "s",
+    ylab = "g(s)",
+    main = "Volterra Equation Solution first kind"
+)
+# add the true solution
+lines(res$sgrid, trueg(res$sgrid), col = "red", lty = 2)
+legend( 
+    "topright",
+    legend = c("Estimated Value", "True Value"),
+    col = c("blue", "red"),
+    lty = c(1, 2)
+)
 }

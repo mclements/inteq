@@ -35,6 +35,54 @@ fredholm_solve(
 
 \item{gamma}{regularization parameter}
 }
+\value{
+data-frame with evaluation points 'ygrid' and calculations 'ggrid'
+}
 \description{
 Solve a Fredholm equation of the first and second kind
+}
+\examples{
+# Define the kernel function
+k <- function(s, t) {
+    ifelse(abs(s - t) <= 3, 1 + cos(pi * (t - s) / 3), 0)
+}
+
+# Define the right-hand side function
+f <- function(s) {
+    sp <- abs(s)
+    sp3 <- sp * pi / 3
+    ((6 - sp) * (2 + cos(sp3)) + (9 / pi) * sin(sp3)) / 2
+}
+
+# Define the true solution for comparison
+trueg <- function(s) {
+    k(0, s)
+}
+
+# Solve the Fredholm equation
+res <- fredholm_solve(
+    k, f, -3, 3, 1001L,
+    smin = -6, smax = 6, snum = 2001L,
+    gamma = 0.01
+)
+
+# Plot the results on the same graph using base graphics
+plot(
+    res$ygrid, res$ggrid,
+    type = "l",
+    col = "blue",
+    xlim = c(-3, 3),
+    #ylim = c(-1, 1),
+    xlab = "s",
+    ylab = "g(s)",
+    main = "Fredholm Equation Solution"
+)
+# add the true solution
+lines(res$ygrid, trueg(res$ygrid), col = "red", lty = 2)
+legend( 
+    "topright",
+    legend = c("Estimated Value", "True Value"),
+    col = c("blue", "red"),
+    lty = c(1, 2)
+)
 }
