@@ -67,7 +67,7 @@ f(s) = \frac{1}{2} \left[ (6 - |s|)\left(2 + \cos\left(\frac{|s| \pi}{3}\right)\
 
 The true solution is \( g(y) = K(0, y) \).
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 
 library(inteq)
 
@@ -145,7 +145,7 @@ g(s) = \frac{2 + s^2}{2}.
 \]
 
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 k <- function(s,t) {
         cos(t-s)
 }
@@ -194,7 +194,7 @@ with true solution
 g(s) = \cosh(s).
 \]
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 k <- function(s,t) {
         0.5 * (t-s)** 2 * exp(t-s)
 }

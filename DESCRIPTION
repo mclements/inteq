@@ -1,7 +1,7 @@
 Package: inteq
 Type: Package
 Title: Numerical Solution of Integral Equations
-Version: 1.0
+Version: 1.1
 Authors@R: c(person("Mark", "Clements", role = c("aut", "cre"),
 		     email = "mark.clements@ki.se"),
 	     person("Aaron", "Jehle", role="aut"),
